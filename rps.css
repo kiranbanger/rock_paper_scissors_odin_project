@@ -1,0 +1,26 @@
+body {
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.buttons {
+
+}
+
+button {
+  padding: 10px;
+  margin: 10px;
+  width: 150px;
+  height: 150px;
+  font-size: 20px;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  background: blue;
+  color: white;
+}
