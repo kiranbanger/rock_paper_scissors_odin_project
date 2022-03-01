@@ -27,17 +27,33 @@ function playRound(playerSelection, computerSelection){
 function initializeResults(){
   let resultsDiv = document.createElement('div');
   resultsDiv.className = 'results';
+	
+  let displayDiv = document.createElement('div');
+  displayDiv.className = 'display';
+  
+  let displayComputerDiv = document.createElement('div');
+  displayComputerDiv.id = 'computer-display-div';
+  displayComputerDiv.textContent = 'Computer: ';
+  
+  displayDiv.append(displayComputerDiv);
   
   let resultsDivComputer = document.createElement('div');
   resultsDivComputer.id='computer-div';
   resultsDivComputer.innerHTML = 0;
+  
+  resultsDiv.append(resultsDivComputer);
 
+  let displayPlayerDiv = document.createElement('div');
+  displayPlayerDiv.id = 'player-display-div';
+  displayPlayerDiv.textContent = 'Player: ';
   
   let resultsDivPlayer = document.createElement('div');
   resultsDivPlayer.id = 'player-div';
   resultsDivPlayer.innerHTML=0;
   
-  resultsDiv.append(resultsDivComputer);
+  displayDiv.append(displayPlayerDiv);
+  
+  resultsDiv.append(displayDiv);
   resultsDiv.append(resultsDivPlayer);
   
   document.querySelector('body').append(resultsDiv);  
@@ -72,16 +88,13 @@ function displayResults(scores){
   return
 }
 
-const rockBtn = document.getElementById('rock-btn');
-rockBtn.addEventListener('click', ()=> {playRound(rockBtn.value, computerPlay() )});
+const buttons = document.querySelectorAll('.buttons button');
 
-const paperBtn = document.getElementById('paper-btn');
-paperBtn.addEventListener('click', ()=> {playRound(paperBtn.value, computerPlay() )});
+buttons.forEach(b => console.log(b));
 
-const scissorsBtn = document.getElementById('scissors-btn');
-scissorsBtn.addEventListener('click', ()=> {playRound(scissorsBtn.value, computerPlay() )});
-
-document.body.addEventListener('click', initializeResults());//when one of the three buttons is clicked, the initializeResults function should run
-
-//const buttons = document.getElementsByClassName('buttons');
-//console.log(buttons);
+buttons.forEach(button => button.addEventListener('click', () =>
+  {
+    playRound(button.value, computerPlay())
+  }))
+  
+document.body.addEventListener('mouseup', initializeResults());//when one of the three buttons is clicked, the initializeResults function should run

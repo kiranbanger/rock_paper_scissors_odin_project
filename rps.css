@@ -19,7 +19,6 @@ button {
 
 .results {
   display: flex;
-  flex-direction: column;
   height: 100px;
   background: blue;
   color: white;
