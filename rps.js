@@ -8,7 +8,6 @@ function playRound(playerSelection, computerSelection){
 
   if(isGameOver()){return};
   
-  console.log('PlayerSelection: ' + playerSelection + ', computerSelection: ' + computerSelection)
   let winner;
   
   if( (playerSelection == 'paper' && computerSelection == 'scissors') || (playerSelection == 'scissors' && computerSelection == 'rock') || (playerSelection == 'rock' && computerSelection == 'paper')){
@@ -20,6 +19,7 @@ function playRound(playerSelection, computerSelection){
   }
   
   updateResults(winner);
+  isGameOver();
   
   return winner
 }
@@ -72,21 +72,25 @@ function isGameOver(){
 }
 
 function displayResults(scores){
-  //console.log(scores);
   let winner = (Number(scores[0].innerHTML) === 5) ? 'computer':'player' ;
   
-  let finalResultsDiv = document.createElement('div');
-  finalResultsDiv.id = 'final-results';
-  finalResultsDiv.innerHTML=  `The ${winner} wins!`;
-  document.querySelector('body').append(finalResultsDiv);
-  
+  if(!(document.querySelector('#final-results'))){
+    let finalResultsDiv = document.createElement('div');
+    finalResultsDiv.id = 'final-results';
+    finalResultsDiv.innerHTML=  `The ${winner} wins!`;
+    document.querySelector('body').append(finalResultsDiv);
+  }
+
   return
 }
 
 const buttons = document.querySelectorAll('.buttons button');
 buttons.forEach(button => button.addEventListener('click', () =>
   {
+    if(!(document.querySelector('.results'))){
+	  initializeResults();
+	}
+	
     playRound(button.value, computerPlay())
   }))
   
-document.body.addEventListener('click', initializeResults());//when one of the three buttons is clicked, the initializeResults function should run
