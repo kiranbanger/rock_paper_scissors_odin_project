@@ -28,33 +28,37 @@ function initializeResults(){
   let resultsDiv = document.createElement('div');
   resultsDiv.className = 'results';
 	
-  let displayDiv = document.createElement('div');
-  displayDiv.className = 'display';
+  let computerDiv = document.createElement('div');
+  computerDiv.className = 'computer';
   
   let displayComputerDiv = document.createElement('div');
-  displayComputerDiv.id = 'computer-display-div';
-  displayComputerDiv.textContent = 'Computer: ';
-  
-  displayDiv.append(displayComputerDiv);
-  
-  let resultsDivComputer = document.createElement('div');
-  resultsDivComputer.id='computer-div';
-  resultsDivComputer.innerHTML = 0;
-  
-  resultsDiv.append(resultsDivComputer);
+  displayComputerDiv.className = 'display';
+  displayComputerDiv.textContent = 'Computer Score: ';
 
+  let scoreComputerDiv = document.createElement('div');
+  scoreComputerDiv.className = 'score';
+  scoreComputerDiv.textContent = 0;
+  
+  computerDiv.append(displayComputerDiv);
+  computerDiv.append(scoreComputerDiv);
+  
+  resultsDiv.append(computerDiv);
+  
+  let playerDiv = document.createElement('div');
+  playerDiv.className = 'player';
+  
   let displayPlayerDiv = document.createElement('div');
-  displayPlayerDiv.id = 'player-display-div';
-  displayPlayerDiv.textContent = 'Player: ';
+  displayPlayerDiv.className = 'display';
+  displayPlayerDiv.textContent = 'Player Score: ';
+
+  let scorePlayerDiv = document.createElement('div');
+  scorePlayerDiv.className = 'score';
+  scorePlayerDiv.textContent = 0;
   
-  let resultsDivPlayer = document.createElement('div');
-  resultsDivPlayer.id = 'player-div';
-  resultsDivPlayer.innerHTML=0;
+  playerDiv.append(displayPlayerDiv);
+  playerDiv.append(scorePlayerDiv);
   
-  displayDiv.append(displayPlayerDiv);
-  
-  resultsDiv.append(displayDiv);
-  resultsDiv.append(resultsDivPlayer);
+  resultsDiv.append(playerDiv);
   
   document.querySelector('body').append(resultsDiv);  
   
@@ -62,15 +66,15 @@ function initializeResults(){
 }
 
 function updateResults(winner){
-    document.querySelector(`#${winner}-div`).innerHTML = Number(document.querySelector(`#${winner}-div`).innerHTML)+1;
+    document.querySelector(`.${winner} .score`).textContent = Number(document.querySelector(`.${winner} .score`).textContent)+1;
 	
 	return
 }
 
 function isGameOver(){
-  let scores = document.querySelector('.results').children;
+  let scores = document.querySelectorAll('.results .score');
   
-  if(Number(scores[0].innerHTML)===5 || Number(scores[1].innerHTML)===5){
+  if(Number(scores[0].textContent)===5 || Number(scores[1].textContent)===5){
 	displayResults(scores);
 	return true
   }
@@ -82,6 +86,7 @@ function displayResults(scores){
   let winner = (Number(scores[0].innerHTML) === 5) ? 'computer':'player' ;
   
   let finalResultsDiv = document.createElement('div');
+  finalResultsDiv.id = 'final-results';
   finalResultsDiv.innerHTML=  `The ${winner} wins!`;
   document.querySelector('body').append(finalResultsDiv);
   
@@ -89,12 +94,9 @@ function displayResults(scores){
 }
 
 const buttons = document.querySelectorAll('.buttons button');
-
-buttons.forEach(b => console.log(b));
-
 buttons.forEach(button => button.addEventListener('click', () =>
   {
     playRound(button.value, computerPlay())
   }))
   
-document.body.addEventListener('mouseup', initializeResults());//when one of the three buttons is clicked, the initializeResults function should run
+document.body.addEventListener('click', initializeResults());//when one of the three buttons is clicked, the initializeResults function should run

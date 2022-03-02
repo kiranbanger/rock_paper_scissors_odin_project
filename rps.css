@@ -10,16 +10,18 @@ body {
 }
 
 button {
-  padding: 10px;
   margin: 10px;
   width: 150px;
   height: 150px;
   font-size: 20px;
 }
 
-.results {
+.computer,.player{
   display: flex;
-  height: 100px;
-  background: blue;
-  color: white;
+  font-size: 20px;
+  gap: 10px;
+}
+
+#final-results{
+  font-size: 50px;
 }
