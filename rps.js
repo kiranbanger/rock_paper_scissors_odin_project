@@ -27,38 +27,28 @@ function playRound(playerSelection, computerSelection){
 function initializeResults(){
   let resultsDiv = document.createElement('div');
   resultsDiv.className = 'results';
+  
+  competitorArr = ['computer','player'];
+  
+  competitorArr.forEach(competitor =>{
+    let competitorDiv = document.createElement('div');
+	competitorDiv.className = competitor;
 	
-  let computerDiv = document.createElement('div');
-  computerDiv.className = 'computer';
-  
-  let displayComputerDiv = document.createElement('div');
-  displayComputerDiv.className = 'display';
-  displayComputerDiv.textContent = 'Computer Score: ';
-
-  let scoreComputerDiv = document.createElement('div');
-  scoreComputerDiv.className = 'score';
-  scoreComputerDiv.textContent = 0;
-  
-  computerDiv.append(displayComputerDiv);
-  computerDiv.append(scoreComputerDiv);
-  
-  resultsDiv.append(computerDiv);
-  
-  let playerDiv = document.createElement('div');
-  playerDiv.className = 'player';
-  
-  let displayPlayerDiv = document.createElement('div');
-  displayPlayerDiv.className = 'display';
-  displayPlayerDiv.textContent = 'Player Score: ';
-
-  let scorePlayerDiv = document.createElement('div');
-  scorePlayerDiv.className = 'score';
-  scorePlayerDiv.textContent = 0;
-  
-  playerDiv.append(displayPlayerDiv);
-  playerDiv.append(scorePlayerDiv);
-  
-  resultsDiv.append(playerDiv);
+	let displayCompetitorDiv = document.createElement('div');
+	displayCompetitorDiv.className = 'display';
+	
+	let textDisplay = `${competitor} Score: `;
+	displayCompetitorDiv.textContent = textDisplay[0].toUpperCase() + textDisplay.substring(1);
+	
+	let scoreCompetitorDiv = document.createElement('div');
+	scoreCompetitorDiv.className = 'score';
+	scoreCompetitorDiv.textContent = 0;
+	
+	competitorDiv.append(displayCompetitorDiv);
+	competitorDiv.append(scoreCompetitorDiv);
+	
+	resultsDiv.append(competitorDiv);
+  })
   
   document.querySelector('body').append(resultsDiv);  
   
@@ -82,7 +72,7 @@ function isGameOver(){
 }
 
 function displayResults(scores){
-  console.log(scores);
+  //console.log(scores);
   let winner = (Number(scores[0].innerHTML) === 5) ? 'computer':'player' ;
   
   let finalResultsDiv = document.createElement('div');
